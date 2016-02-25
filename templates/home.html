@@ -1,0 +1,334 @@
+<!Doctype html>
+<html>
+<head>
+	<title>Dashboard</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+	<link href="static/css/bootstrap.min.css" rel="stylesheet" media ="screen">
+	<link href="static/css/style.css" rel="stylesheet" media ="screen">
+	<link href="static/css/dc.css" rel="stylesheet" media ="screen">
+	<link href='http://fonts.googleapis.com/css?family=Lato:200,400' rel='stylesheet' type='text/css'>
+	
+    
+    <style>
+        .liquidFillGaugeText { font-family: Helvetica; font-weight: bold; fill:red; }
+      body{
+        background-color:#022530;
+      }
+
+    /* testing out d3 tooltip */
+    .d3-tip {
+      line-height: 1;
+      font-weight: bold;
+      padding: 12px;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      border-radius: 8px;
+    }
+
+    /* Creates a small triangle extender for the tooltip */
+    .d3-tip:after {
+      box-sizing: border-box;
+      display: inline;
+      font-size: 10px;
+      width: 100%;
+      line-height: 1;
+      color: rgba(0, 0, 0, 0.8);
+      content: "\25BC";
+      position: absolute;
+      text-align: center;
+    }
+
+    /* Style northward tooltips differently */
+    .d3-tip.n:after {
+      margin: -1px 0 0 0;
+      top: 100%;
+      left: 0;
+    }
+
+    body {
+        font-size: 16px;
+        line-height: 20px;
+        color: #525252;
+
+    }
+
+    h3 {
+        font-family: "Helvetica Neue";
+    }
+
+
+   #count-reset-row {
+    width: 100%;
+   }
+
+    #ethnicity-chart {
+        font-family: 'Lato', futura, georgia;
+    }
+
+    #entry-status-chart {
+        font-family: 'Lato', futura, georgia;
+    }
+
+    #grad-status-chart {
+        width: 250px;
+        font-family: 'Lato', futura, georgia;
+    }
+
+    #gender-chart {
+        width: 250px;
+        font-family: 'Lato', futura, georgia;
+    }
+
+    #hour-chart {
+        width: 250px;
+        font-family: 'Lato', futura, georgia;
+    }
+
+    #year-chart {
+        width: 500px;
+        font-family: 'Lato', futura, georgia;
+    }
+
+    #series-chart {
+        width: 500px;
+        font-family: 'Lato', futura, georgia;
+    }
+
+    #data-count-top {
+        width: 100%;
+    }
+
+    .navbar-text-q {
+        font: 400 24px "Helvetica Neue";
+        vertical-align: middle;
+    }
+
+    #data-table {
+      padding-top: 100px;
+    }
+
+    #data-count-bottom {
+      padding-top: 30px;
+    }
+
+    #census-container {
+        margin-top: 46px;
+        max-width: 1100px;
+    }
+
+    span.filter {
+        font-size: 14px;
+        color: #cc4c02;
+        font-weight: 500;
+        } 
+
+    span.filter-count {
+        color: #428BCA;
+        font-weight: bold;
+        width: 20px;
+        font-size: 18px;
+    }
+
+    span.total-count {
+        color: #525252;
+        font-weight: bold;
+        width: 20px;
+    }
+
+    span.reset {
+        font-size: 12px;
+        color: #cc4c02;
+    }
+
+    span.company-desc {
+        color: #525252;
+        font-size: 16px;
+        font-weight: normal;
+    }
+
+    span.chart-footnotes {
+        font: 200 14px "Helvetica Neue";
+        stroke: #969696;
+    }
+
+    span.exit-desc {
+        background-color: yellow;
+    }
+
+    #reset-all {
+        color: #CC4C02;
+    }
+
+
+    tr.header {
+        
+        color: #696969;
+    }
+
+    tr {
+        font: 100 14px 'Lato';
+        color: #969696;
+    }
+    </style>
+	
+</heads
+<body>
+	<div id='navhead' class='navbar navbar-static-top navbar-inverse'>
+			<div class='container'>
+				
+				<h2 style= 'float:left; margin:0 auto;  margin-top:12px;color:white;'>McNulty Dashboard</h2>
+			</div>
+	</div>
+
+	<!--<div class='container'>
+		<svg id="fillgauge1" class='gauge' width="50%" height="230" onclick="gauge1.update(NewValue());"></svg>
+ 		<svg id="fillgauge2" class='gauge' width="49%" height="230" onclick="gauge2.update(NewValue());"></svg>
+ 		
+		<div class='col-md-6'>
+			<h3 id='part-time'>Part-Time Workers</h3>
+		</div>
+		<div class='col-md-6' >
+			<h3> Full-Time Workers</h3>
+		</div>
+	 
+	 </div>-->
+	  
+
+<div class="container" id="census-container">
+
+    <div id="data-count-top" class="row" style='color:white'>
+
+                <span class="filter-count"></span> selected out of <span class="total-count"  style='color:rgb(23, 139, 202)'></span> records |&nbsp;
+                <span id="reset-all">
+                    <a href="javascript:dc.filterAll();dc.redrawAll();" style='color:##178BCA;font-size:12px;'>Reset ALL Filters</a>
+                </span> 
+                 <p>
+    </div>
+    <br>
+    <br>
+    <br>
+       <div class="row">
+       <div class='col-md-4'>
+            <div id="hour-chart">
+                  <strong style='color:white;margin-bottom: 10px;font-size:25px'>Hour</strong>
+                  <a class="reset" href="javascript:hourChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+
+                  <div class="clearfix" style='height:10px;'></div>
+            </div> 
+         </div>
+       <div class='col-md-4'>
+                 <div id="grad-status-chart">
+                    <strong style='color:white;margin-bottom: 10px;font-size:25px'>Income</strong>
+                    <a class="reset" href="javascript:gradStatusChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+                    <div class="clearfix" style='height:10px;'></div>
+                </div>
+        </div>
+        <div class='col-md-4'>
+              <div id="gender-chart">
+                  <strong style='color:white;margin-bottom: 10px;font-size:25px'>Gender</strong>
+                  <a class="reset" href="javascript:undergradChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+
+                  <div class="clearfix" style='height:10px;'></div>
+            </div> 
+        </div>
+        
+
+        </div>
+    <br>
+    <br>
+       <div class="row">
+       <div class='col-md-6'>
+            <div id="ethnicity-chart">
+                <strong style='color:white;font-size:25px'>Age</strong>
+                <a class="reset" href="javascript:ethnicityChart.filterAll();dc.redrawAll();" style="display: none;"> | reset</a><br>
+                <div class="clearfix" style='height:10px;'></div>
+            </div>
+        </div>
+        <div class='col-md-6'>
+            <div id="entry-status-chart">
+                <strong style='color:white;font-size:25px'>Education Level</strong>
+                <a class="reset" href="javascript:entryStatusChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+                <span class="reset" style="display: none;"> | <span class="filter"></span></span>
+
+                <div class="clearfix" style='height:10px;'></div>
+            </div>
+        </div>
+            
+
+
+                <!-- <div id="data-count-bottom" class="row">
+                <span class="filter-count"></span> selected out of <span class="total-count"></span> records |&nbsp;
+            <span id="reset-all">
+            <a href="javascript:dc.filterAll();dc.redrawAll();">Reset ALL Filters</a>
+            </span>
+        </div>-->
+        <div style='height:500px;width:100%;overflow: hidden;'>
+        <div id="data-table" >
+             <table class="table table-hover dc-data-table">
+                <thead>
+                <tr class="header">
+                    <th>Income</th>
+                    <th>Education</th>
+                    <th>Gender</th>
+                    <th>Age</th>
+<!--                     <th>Year</th>
+                    <th>Count</th> -->
+                </tr>
+                </thead>
+            </table>
+        </div>
+        </div>
+</div>
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.7/crossfilter.min.js"></script>
+<script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="static/js/liquidFillGauge.js" language="JavaScript"></script>
+<script src="static/js/dc.js" language="JavaScript"></script>
+<script src="static/js/d3.tip.min.js" language="JavaScript"></script>
+<script src="static/js/studentCensus.js" language="JavaScript">
+	$('#fillgauge1').click(function(){
+		$('#part-time').css('display','none');
+	})
+</script>
+<script language="JavaScript">
+	var data = {{datas|tojson}};
+
+    var gauge1 = loadLiquidFillGauge("fillgauge1", data.summary.under40*100);
+    var config1 = liquidFillGaugeDefaultSettings();
+    config1.circleColor = "#f90000";
+    config1.textColor = "#FF4444";
+    config1.waveTextColor = "#f40000";
+    config1.waveColor = "#9036f6";
+    config1.circleThickness = 0.576;
+    config1.textVertPosition = 0.2;
+    config1.waveAnimateTime = 1000;
+    
+ var gauge2= loadLiquidFillGauge("fillgauge2", data.summary.exactly40*100);
+ var config2 = liquidFillGaugeDefaultSettings();
+    config2.circleColor = "#FF7777";
+    config2.textColor = "#FF4444";
+    config2.waveTextColor = "#FFAAAA";
+    config2.waveColor = "#FFDDDD";
+    config2.circleThickness = 0.2;
+    config2.textVertPosition = 0.2;
+    config2.waveAnimateTime = 1000;
+  
+ var gauge3= loadLiquidFillGauge("fillgauge3", data.summary.over40*100);
+ var config3 = liquidFillGaugeDefaultSettings();
+    config3.circleColor = "#FF7777";
+    config3.textColor = "#FF4444";
+    config3.waveTextColor = "#FFAAAA";
+    config3.waveColor = "#FFDDDD";
+    config3.circleThickness = 0.2;
+    config3.textVertPosition = 0.2;
+    config3.waveAnimateTime = 1000;
+
+
+</script>
+</body>
+</html>

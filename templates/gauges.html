@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="http://d3js.org/d3.v3.min.js" language="JavaScript"></script>
+    <script src="static/js/liquidFillGauge.js" language="JavaScript"></script>
+    <style>
+        .liquidFillGaugeText { font-family: Helvetica; font-weight: bold; fill:red; }
+      body{
+        background-color:#022530;
+      }
+    </style>
+</head>
+<body>
+
+    <svg id="fillgauge1" width="33%" height="214" onclick="gauge1.update(NewValue());"></svg>
+ <svg id="fillgauge2" width="33%" height="214" onclick="gauge2.update(NewValue());"></svg>
+ <svg id="fillgauge3" width="33%" height="214" onclick="gauge2.update(NewValue());"></svg>
+<script language="JavaScript">
+    var gauge1 = loadLiquidFillGauge("fillgauge1", 71);
+    var config1 = liquidFillGaugeDefaultSettings();
+    config1.circleColor = "#f90000";
+    config1.textColor = "#FF4444";
+    config1.waveTextColor = "#f40000";
+    config1.waveColor = "#9036f6";
+    config1.circleThickness = 0.576;
+    config1.textVertPosition = 0.2;
+    config1.waveAnimateTime = 1000;
+    
+ var gauge2= loadLiquidFillGauge("fillgauge2", 30);
+ var config2 = liquidFillGaugeDefaultSettings();
+    config2.circleColor = "#FF7777";
+    config2.textColor = "#FF4444";
+    config2.waveTextColor = "#FFAAAA";
+    config2.waveColor = "#FFDDDD";
+    config2.circleThickness = 0.2;
+    config2.textVertPosition = 0.2;
+    config2.waveAnimateTime = 1000;
+  
+ var gauge3= loadLiquidFillGauge("fillgauge3", 50);
+ var config3 = liquidFillGaugeDefaultSettings();
+    config3.circleColor = "#FF7777";
+    config3.textColor = "#FF4444";
+    config3.waveTextColor = "#FFAAAA";
+    config3.waveColor = "#FFDDDD";
+    config3.circleThickness = 0.2;
+    config3.textVertPosition = 0.2;
+    config3.waveAnimateTime = 1000;
+   /* function NewValue(){
+        if(Math.random() > .5){
+            return Math.round(Math.random()*100);
+        } else {
+            return (Math.random()*100).toFixed(1);
+        }
+    }*/
+</script>
+</body>
+</html>
