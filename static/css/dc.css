@@ -319,8 +319,13 @@ div.dc-chart {
   color: steelblue;
   border-top-width: 3px;
   font-size: 20px;
+  display: none;
 }
 
 .dc-table-column._1 {
   text-align: left;
+}
+
+.dc-table-group info {
+  display: none;
 }

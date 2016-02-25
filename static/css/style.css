@@ -48,3 +48,7 @@ g.g2 rect {
   stroke: black;
   fill: blue;
 }
+
+th {
+  color: white;
+}

@@ -174,16 +174,16 @@
     }
     </style>
 	
-</heads
+</head>
 <body>
-	<div id='navhead' class='navbar navbar-static-top navbar-inverse'>
+	   <!--<<div id='navhead' class='navbar navbar-static-top navbar-inverse'>
 			<div class='container'>
 				
 				<h2 style= 'float:left; margin:0 auto;  margin-top:12px;color:white;'>McNulty Dashboard</h2>
 			</div>
 	</div>
 
-	<!--<div class='container'>
+div class='container'>
 		<svg id="fillgauge1" class='gauge' width="50%" height="230" onclick="gauge1.update(NewValue());"></svg>
  		<svg id="fillgauge2" class='gauge' width="49%" height="230" onclick="gauge2.update(NewValue());"></svg>
  		
@@ -256,7 +256,7 @@
                 <div class="clearfix" style='height:10px;'></div>
             </div>
         </div>
-            
+        </div>
 
 
                 <!-- <div id="data-count-bottom" class="row">
@@ -265,17 +265,19 @@
             <a href="javascript:dc.filterAll();dc.redrawAll();">Reset ALL Filters</a>
             </span>
         </div>-->
-        <div style='height:500px;width:100%;overflow: hidden;'>
-        <div id="data-table" >
-             <table class="table table-hover dc-data-table">
+       <div style='height:80px; width:100%;'></div>
+        <button class='btn btn-success' style='float:right;'>Export List</button>
+        <div style='height:500px;width:100%;overflow: auto;'>
+        <div id="data-table" style='margin:0 auto;top:-30px; position:relative;'>
+             <table class="table table-hover dc-data-table" style='margin:0 auto;'>
                 <thead>
                 <tr class="header">
                     <th>Income</th>
                     <th>Education</th>
-                    <th>Gender</th>
                     <th>Age</th>
-<!--                     <th>Year</th>
-                    <th>Count</th> -->
+                    <th>Gender</th>
+                   <th>Work Hours</th>
+                    <th>Email</th> 
                 </tr>
                 </thead>
             </table>

@@ -317,7 +317,7 @@
             })
             .order(d3.ascending)
             .renderlet(function(table) {
-                table.selectAll(".dc-table-group").classed("info", true);
+                table.selectAll(".dc-table-group").classed("info", false);
             });
 
         dc.renderAll();
