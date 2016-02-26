@@ -7,7 +7,7 @@
     var seriesChart = dc.seriesChart("#series-chart");
 
 
-    d3.csv("./static/files/Workbook2.csv", function(error, csv) {
+    d3.csv("./static/files/Workbook3.csv", function(error, csv) {
         var data = crossfilter(csv);
         var all = data.groupAll();
 
@@ -309,7 +309,7 @@
                     return d.hour;
                 },
                 function(d) {
-                    return d.count;
+                    return d.email;
                 }
             ])
             .sortBy(function(d) {
